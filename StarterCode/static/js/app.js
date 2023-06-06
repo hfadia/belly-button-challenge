@@ -22,11 +22,13 @@ d3.json(link).then(function(data) {
     let otu_ids = sample.otu_ids
     let otu_labels = sample.otu_labels
     let sample_values = sample.sample_values
+    let labels = sample.metadata
 
     let entry = {'otu_ids':otu_ids, 'otu_labels': otu_labels, 'sample_values':sample_values}
     result_object[id] = entry
   }
 
+  //let labels = Object.keys(sample.metadata)
   let names = Object.keys(result_object)
   //let names = samples.map(item => item.id)
   //otu_ids = samples.map(item => item.otu_ids)
@@ -93,16 +95,19 @@ function optionChanged(value){
   Plotly.newPlot("bar", data, layout);
 
 
-  // let scatter = {
-  //   x: otu_ids,
-  //   y: sample_values,
-  //   text: otu_labels, 
-  //   type: 'scatter'
-  // }
+   let scatter = {
+     x: otu_ids,
+     y: sample_values,
+     text: otu_labels,
+     size: sample_values,
+     color: otu_ids,
+     type: 'scatter'
+   }
 
-  // let data3 = [scatter];
+  let data3 = [scatter];
 
-  // plotly.newPlot("bubble", data3);
+  Plotly.newPlot("bubble", data3);
 
 }
+
 
